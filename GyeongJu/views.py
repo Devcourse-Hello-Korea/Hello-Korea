@@ -9,7 +9,7 @@ def index(request):
 
 def food_index(request):
     if request.method == 'GET':
-        korean_data, western_data, japanese_data, chinese_data = None
+        korean_data, western_data, japanese_data, chinese_data = None, None, None, None
         korean_food_model.objects.all().delete()
         western_food_model.objects.all().delete()
         japanese_food_model.objects.all().delete()
