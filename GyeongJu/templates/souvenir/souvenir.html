@@ -1,0 +1,9 @@
+{% if breads %}
+    {% for bread in breads %}
+    <p>{{ bread.name  }}</p>
+    <p>{{ bread.description }}</p>
+    <img src="{{ bread.image}}" alt="{{ bread.name }}">
+    {% endfor %}
+{% else %}
+<p>no breads</p>
+{% endif %}
