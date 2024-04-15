@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Data</title>
+</head>
+<body>
+    <h1>한식</h1>
+    <ul>
+        {% if korean %}
+            {% for k in korean %}
+                <li>
+                    {{ k.name }} 
+                    {{ k.address }} 
+                    {{ k.number }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>검색 결과가 없습니다.</li>
+        {% endif %}
+    </ul>
+
+    <h1>양식</h1>
+    <ul>
+        {% if western %}
+            {% for w in western %}
+                <li>
+                    {{ w.name }} 
+                    {{ w.address }} 
+                    {{ w.number }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>검색 결과가 없습니다.</li>
+        {% endif %}
+    </ul>
+
+    <h1>일식</h1>
+    <ul>
+        {% if japanese %}
+            {% for j in japanese %}
+                <li>
+                    {{ j.name }} 
+                    {{ j.address }} 
+                    {{ j.number }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>검색 결과가 없습니다.</li>
+        {% endif %}
+    </ul>
+
+    <h1>중식</h1>
+    <ul>
+        {% if chinese %}
+            {% for c in chinese %}
+                <li>
+                    {{ c.name }} 
+                    {{ c.address }} 
+                    {{ c.number }}
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>검색 결과가 없습니다.</li>
+        {% endif %}
+    </ul>
+</body>
+</html>
