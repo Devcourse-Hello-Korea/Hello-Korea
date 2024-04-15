@@ -19,6 +19,8 @@ class Migration(migrations.Migration):
                 ('image', models.URLField(blank=True, max_length=500, null=True)),
                 ('description', models.TextField()),
             ],
+        ),
+        migrations.CreateModel(
             name='chinese_food_model',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
