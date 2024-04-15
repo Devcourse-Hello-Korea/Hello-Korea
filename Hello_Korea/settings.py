@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'GyeongJu',
+    'GyeongJu.apps.GyeongjuConfig',
 ]
 
 MIDDLEWARE = [
