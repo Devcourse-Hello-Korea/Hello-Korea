@@ -1,0 +1,6 @@
+# pycahce 무시
+__pycache__/
+*.pyc
+#마이그레이션 무시
+migrations/
+db.sqlite3
