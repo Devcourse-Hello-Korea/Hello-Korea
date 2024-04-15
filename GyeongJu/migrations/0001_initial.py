@@ -19,5 +19,39 @@ class Migration(migrations.Migration):
                 ('image', models.URLField(blank=True, max_length=500, null=True)),
                 ('description', models.TextField()),
             ],
+            name='chinese_food_model',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+                ('address', models.CharField(max_length=100)),
+                ('number', models.CharField(max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='japanese_food_model',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+                ('address', models.CharField(max_length=100)),
+                ('number', models.CharField(max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='korean_food_model',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+                ('address', models.CharField(max_length=100)),
+                ('number', models.CharField(max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='western_food_model',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+                ('address', models.CharField(max_length=100)),
+                ('number', models.CharField(max_length=100)),
+            ],
         ),
     ]
