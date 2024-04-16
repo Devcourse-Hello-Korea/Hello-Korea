@@ -4,3 +4,4 @@ __pycache__/
 #마이그레이션 무시
 migrations/
 db.sqlite3
+Hello-Korea.session.sql

@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Hello-Korea",
+            "database": "${workspaceFolder:Hello-Korea}/db.sqlite3"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
