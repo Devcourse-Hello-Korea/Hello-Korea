@@ -23,3 +23,12 @@ def food_index(request):
 
 def korean_food_view(request):
     return HttpResponse("한식 페이지")
+
+def western_food_view(request):
+    return HttpResponse("양식 페이지")
+
+def japanese_food_view(request):
+    return HttpResponse("일식 페이지")
+
+def chinese_food_view(request):
+    return HttpResponse("중식 페이지")
