@@ -22,17 +22,34 @@ def food_index(request):
         return render(request, 'food/index.html', {'korean': korean_data, 'western': western_data, 'japanese': japanese_data, 'chinese': chinese_data})
 
 def korean_food_view(request):
-    korean_data = None
-    korean_food_model.objects.all().delete()
-    get_food_data(KOREAN_URL, 'korean', 11)
-    korean_data = korean_food_model.objects.all()
-    return render(request, 'food/index.html', {'korean': korean_data})
+    if request.method == 'GET':
+        korean_data = None
+        korean_food_model.objects.all().delete()
+        get_food_data(KOREAN_URL, 'korean', 11)
+        korean_data = korean_food_model.objects.all()
+        return render(request, 'food/index.html', {'korean': korean_data})
 
 def western_food_view(request):
-    return HttpResponse("양식 페이지")
+    if request.method == 'GET':
+        western_data = None
+        western_food_model.objects.all().delete()
+        get_food_data(WESTERN_URL, 'western', 11)
+        western_data = korean_food_model.objects.all()
+        return render(request, 'food/index.html', {'western': western_data})
 
 def japanese_food_view(request):
-    return HttpResponse("일식 페이지")
+    if request.method == 'GET':
+        japanese_data = None
+        japanese_food_model.objects.all().delete()
+        get_food_data(JAPANESE_URL, 'japanese', 11)
+        japanese_data = japanese_food_model.objects.all()
+        return render(request, 'food/index.html', {'japanese': japanese_data})
 
 def chinese_food_view(request):
-    return HttpResponse("중식 페이지")
+    if request.method == 'GET':
+        chinese_data = None
+        chinese_food_model.objects.all().delete()
+        get_food_data(CHINESE_URL, 'chinese', 11)
+        chinese_data = korean_food_model.objects.all()
+        return render(request, 'food/index.html', {'chinese': chinese_data})
+
