@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전통문화체험</title>
+</head>
+<body>
+    <ul>
+        {% for item in data %}
+            <li style="margin-bottom: 20px">
+                체험명 : {{ item.name }}<br>
+                설명 : {{ item.info }}<br>
+                전화번호 : {{ item.call }}<br>
+                <address>주소 : {{ item.address }}</address><br>
+                홈페이지 : <a href="{{ item.homepage }}">{{ item.homepage }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
