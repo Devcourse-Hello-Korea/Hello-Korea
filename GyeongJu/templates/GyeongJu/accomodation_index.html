@@ -5,19 +5,23 @@
 </head>
 <body>
     <h1>Motel Data</h1>
-    <!-- 폼 렌더링 -->
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">검색</button>
+        <button type="submit" name="action" value="search">검색</button>
+        <button type="submit" name="action" value="crawl">크롤링</button>
     </form>
-    <!-- 모텔 데이터 보여주기 -->
     <ul>
         {% if data %}
             {% for item in data %}
                 <li>
-                    {{ item.name }}: [{{ item.location }}] - {{ item.price }}원
-                    {{ item.description }}
+                    {{ item.name }}: [{{ item.location }}]
+                    <br>
+                    <a href="{{ item.link }}">웹사이트or위치</a>
+                    <br>
+                    <img src="{{ item.img_src1 }}" style="width:100px; height:auto;">
+                    <img src="{{ item.img_src2 }}" style="width:100px; height:auto;">
+                    <img src="{{ item.img_src3 }}" style="width:100px; height:auto;">
                 </li>
             {% endfor %}
         {% else %}
