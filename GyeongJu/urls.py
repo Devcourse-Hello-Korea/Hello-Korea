@@ -16,8 +16,4 @@ urlpatterns = [
     path('food/japanese', food_views.japanese_food_view),
     path('food/chinese', food_views.chinese_food_view),
     path('Tradition', tradition_views.tradition_view),
-<<<<<<< HEAD
 ]
-=======
-]
->>>>>>> main
