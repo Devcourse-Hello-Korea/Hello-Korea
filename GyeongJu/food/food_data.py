@@ -35,8 +35,6 @@ def get_food_data(url, kind, page):
                 chinese_model = chinese_food_model(name=shop_name, address=shop_address, number=shop_number)
                 chinese_model.save()
 
-        #time.sleep(1)
-
 
 
 
