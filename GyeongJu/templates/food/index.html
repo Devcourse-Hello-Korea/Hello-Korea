@@ -4,9 +4,9 @@
     <title>Food Data</title>
 </head>
 <body>
+    {% if korean %}
     <h1>한식</h1>
-    <ul>
-        {% if korean %}
+        <ul>
             {% for k in korean %}
                 <li>
                     {{ k.name }} 
@@ -14,14 +14,12 @@
                     {{ k.number }}
                 </li>
             {% endfor %}
-        {% else %}
-            <li>검색 결과가 없습니다.</li>
-        {% endif %}
-    </ul>
+        </ul>
+    {% endif %}
 
+    {% if western %}
     <h1>양식</h1>
-    <ul>
-        {% if western %}
+        <ul>
             {% for w in western %}
                 <li>
                     {{ w.name }} 
@@ -29,14 +27,12 @@
                     {{ w.number }}
                 </li>
             {% endfor %}
-        {% else %}
-            <li>검색 결과가 없습니다.</li>
-        {% endif %}
-    </ul>
+        </ul>
+    {% endif %}
 
+    {% if japanese %}
     <h1>일식</h1>
-    <ul>
-        {% if japanese %}
+        <ul>
             {% for j in japanese %}
                 <li>
                     {{ j.name }} 
@@ -44,14 +40,12 @@
                     {{ j.number }}
                 </li>
             {% endfor %}
-        {% else %}
-            <li>검색 결과가 없습니다.</li>
-        {% endif %}
-    </ul>
+        </ul>
+    {% endif %}
 
+    {% if chinese %}
     <h1>중식</h1>
-    <ul>
-        {% if chinese %}
+        <ul>
             {% for c in chinese %}
                 <li>
                     {{ c.name }} 
@@ -59,9 +53,8 @@
                     {{ c.number }}
                 </li>
             {% endfor %}
-        {% else %}
-            <li>검색 결과가 없습니다.</li>
-        {% endif %}
-    </ul>
+        </ul>
+    {% endif %}
+
 </body>
 </html>
