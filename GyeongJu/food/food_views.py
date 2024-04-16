@@ -22,7 +22,11 @@ def food_index(request):
         return render(request, 'food/index.html', {'korean': korean_data, 'western': western_data, 'japanese': japanese_data, 'chinese': chinese_data})
 
 def korean_food_view(request):
-    return HttpResponse("한식 페이지")
+    korean_data = None
+    korean_food_model.objects.all().delete()
+    get_food_data(KOREAN_URL, 'korean', 11)
+    korean_data = korean_food_model.objects.all()
+    return render(request, 'food/index.html', {'korean': korean_data})
 
 def western_food_view(request):
     return HttpResponse("양식 페이지")
