@@ -1,12 +1,24 @@
-{% comment %} 1. 이미지 소스가 null일 때 아예 img 태그를 렌더링 안하는 방안 고민하기
-2. models에서 primary_key를 따로 지정해주지 않으면 크롤링을 할 때 마다 같은 내용이 계속 들어갈 것 같습니다!
-저는 문화체험명을 primary_key로 설정하는 방식으로 해결하였 {% endcomment %}
 {% if breads %}
     {% for bread in breads %}
     <p>{{ bread.name  }}</p>
     <p>{{ bread.description }}</p>
+    {% if bread.image %}
     <img src="{{ bread.image}}" alt="{{ bread.name }}">
+    {% endif %}
     {% endfor %}
 {% else %}
-<p>no breads</p>
+<p>no bread</p>
+{% endif %}
+
+{% if shops %}
+    {% for shop in shops %}
+    <p>{{ shop.name  }}</p>
+    <p>{{ shop.address }}</p>
+    <p>{{ shop.business_hours }}</p>
+    {% if shop.image %}
+    <img src="{{ shop.image}}" alt="{{ shop.name }}">
+    {% endif %}
+    {% endfor %}
+{% else %}
+<p>no shop</p>
 {% endif %}
