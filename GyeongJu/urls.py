@@ -16,4 +16,6 @@ urlpatterns = [
     path('food/japanese', food_views.japanese_food_view),
     path('food/chinese', food_views.chinese_food_view),
     path('Tradition', tradition_views.tradition_view),
+    path('Tradition/clothes', tradition_views.clothes_view),
+    path('Tradition/accomodation', tradition_views.accomodation_view),
 ]
