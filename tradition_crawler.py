@@ -9,7 +9,7 @@ django.setup()
 from GyeongJu.KoreaTradition.models import TraditionExperienceInfo, TypeInfo
 from GyeongJu.KoreaTradition.experience_constant import *
 
-
+# DB 저장 함수
 def DataSave(names, descriptions, call, address, homepage, typeinfo):
     length = len(names)
     for i in range(length):
@@ -22,7 +22,8 @@ def DataSave(names, descriptions, call, address, homepage, typeinfo):
             type = typeinfo,
         )
         culture_experience.save()
-        
+
+# 전통문화체험에 쓰이는 크롤러
 def ListCrawler(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -52,6 +53,7 @@ def ListCrawler(url):
         
     DataSave(names, descriptions, call, address, homepage, typeinfo)
 
+# 의복체험, 고택체험에 쓰이는 크롤러
 def TableCrawler(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -99,6 +101,7 @@ def TableCrawler(url):
             address.append(contact[1].text.replace('주소 : ', '').replace('주소: ', '').strip())
     DataSave(names, descriptions, call, address, homepage, typeinfo)
 
+# 크롤링 실행
 if __name__ == '__main__':
     ListCrawler(EXPERIENCE_URL)
     TableCrawler(CLOTHES_URL)
