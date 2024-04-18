@@ -4,9 +4,9 @@
     <title>Food Data</title>
 </head>
 <body>
-    <h1>한식</h1>
-    <ul>
-        {% if korean %}
+    {% if korean %}
+    <h1>Korean food</h1>
+        <ul>
             {% for k in korean %}
                 <li>
                     {{ k.name }} 
@@ -14,14 +14,12 @@
                     {{ k.number }}
                 </li>
             {% endfor %}
-        {% else %}
-            <li>검색 결과가 없습니다.</li>
-        {% endif %}
-    </ul>
+        </ul>
+    {% endif %}
 
-    <h1>양식</h1>
-    <ul>
-        {% if western %}
+    {% if western %}
+    <h1>Western food</h1>
+        <ul>
             {% for w in western %}
                 <li>
                     {{ w.name }} 
@@ -29,14 +27,12 @@
                     {{ w.number }}
                 </li>
             {% endfor %}
-        {% else %}
-            <li>검색 결과가 없습니다.</li>
-        {% endif %}
-    </ul>
+        </ul>
+    {% endif %}
 
-    <h1>일식</h1>
-    <ul>
-        {% if japanese %}
+    {% if japanese %}
+    <h1>Japanese food</h1>
+        <ul>
             {% for j in japanese %}
                 <li>
                     {{ j.name }} 
@@ -44,14 +40,12 @@
                     {{ j.number }}
                 </li>
             {% endfor %}
-        {% else %}
-            <li>검색 결과가 없습니다.</li>
-        {% endif %}
-    </ul>
+        </ul>
+    {% endif %}
 
-    <h1>중식</h1>
-    <ul>
-        {% if chinese %}
+    {% if chinese %}
+    <h1>Chinese food</h1>
+        <ul>
             {% for c in chinese %}
                 <li>
                     {{ c.name }} 
@@ -59,9 +53,8 @@
                     {{ c.number }}
                 </li>
             {% endfor %}
-        {% else %}
-            <li>검색 결과가 없습니다.</li>
-        {% endif %}
-    </ul>
+        </ul>
+    {% endif %}
+
 </body>
 </html>

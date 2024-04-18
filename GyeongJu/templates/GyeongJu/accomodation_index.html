@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Motel Data</title>
 </head>
 <body>
-    <h1>Motel Data</h1>
-    <!-- 폼 렌더링 -->
+    <h1>{{ form_data.page_title }}</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">검색</button>
+        <button type="submit" name="action" value="search">{{ form_data.search_button_text }}</button>
+        <button type="submit" name="action" value="crawl">{{ form_data.crawl_button_text }}</button>
+        <br>
+        <button type="submit" name="action" value="translate">Translate</button>
+        #This may take some time
     </form>
-    <!-- 모텔 데이터 보여주기 -->
     <ul>
         {% if data %}
             {% for item in data %}
                 <li>
-                    {{ item.name }}: [{{ item.location }}] - {{ item.price }}원
-                    {{ item.description }}
+                    {{ item.name }}: [{{ item.location }}]
+                    <br>
+                    <a href="{{ item.link }}">{{ form_data.link_text }}</a>
+                    <br>
+                    <img src="{{ item.img_src1 }}" style="width:100px; height:auto;">
+                    <img src="{{ item.img_src2 }}" style="width:100px; height:auto;">
+                    <img src="{{ item.img_src3 }}" style="width:100px; height:auto;">
                 </li>
             {% endfor %}
         {% else %}
-            <li>검색 결과가 없습니다.</li>
+            <li>{{ form_data.no_results_text }}</li>
         {% endif %}
     </ul>
 </body>
