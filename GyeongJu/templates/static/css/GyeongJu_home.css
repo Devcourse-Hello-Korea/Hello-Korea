@@ -66,6 +66,11 @@
 	justify-content: center;
 	height: 100%;
 }
+.d:after{
+	content: '';
+	display: block;
+	clear: both;
+}
 .d .d-btn {
 	font-size: 16px;
 	border: none;
