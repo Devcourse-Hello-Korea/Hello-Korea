@@ -10,6 +10,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Hello_Korea.settings")
 django.setup()
 
 from GyeongJu.Souvenir.souvenir_models import Bread, Shop, ShopLocation
+from GyeongJu.Souvenir.souvenir_trans import translate_all_souvenir
 
 def BreadInfo():
     url = "https://www.gyeongju.go.kr/tour/page.do?mnu_uid=2342&"  # 경주빵
@@ -28,6 +29,7 @@ def BreadInfo():
         description = info.find('p').text
         # 빵 정보를 딕셔너리로 저장
         bread = {
+            "lang": 'ko',
             "name": name,
             "image_url": image_url,
             "description": description
@@ -65,6 +67,7 @@ def ShopInfo():
 
         # 기념품 가게 정보를 딕셔너리로 저장
         shop = {
+            "lang": 'ko',
             "name": name,
             "image_url": image_url,
             "address": ' '.join(address),
@@ -108,6 +111,7 @@ if __name__=='__main__':
     
     for bread in breads:
         bread_instance = Bread.objects.create(
+            lang=bread['lang'],
             name=bread['name'],
             image=bread['image_url'],
             description=bread['description'],
@@ -116,6 +120,7 @@ if __name__=='__main__':
     with transaction.atomic():
         for shop, location in zip(shops, locations):
             shop_instace = Shop.objects.create(
+                lang=shop['lang'],
                 name=shop['name'],
                 image=shop['image_url'],
                 address=shop['address'],
@@ -127,3 +132,4 @@ if __name__=='__main__':
                 lat = location[0],
                 lng = location[1],
             )
+    translate_all_souvenir()
