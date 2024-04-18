@@ -1,12 +1,115 @@
-{% comment %} 1. 이미지 소스가 null일 때 아예 img 태그를 렌더링 안하는 방안 고민하기
-2. models에서 primary_key를 따로 지정해주지 않으면 크롤링을 할 때 마다 같은 내용이 계속 들어갈 것 같습니다!
-저는 문화체험명을 primary_key로 설정하는 방식으로 해결하였 {% endcomment %}
-{% if breads %}
-    {% for bread in breads %}
-    <p>{{ bread.name  }}</p>
-    <p>{{ bread.description }}</p>
-    <img src="{{ bread.image}}" alt="{{ bread.name }}">
-    {% endfor %}
-{% else %}
-<p>no breads</p>
-{% endif %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Souvenir</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"> </script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnJWIxkwpGTuCvn-My4Aiwc-m9Sh2jgNY&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <span class="navbar-brand mb-0 h1">Hello Korea!</span>
+                </div>
+            </nav>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">홈</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">경주</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">전주</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">순천</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Lauguage
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">한국어</a></li>
+                    <li><a class="dropdown-item" href="#">English</a></li>
+                    <li><a class="dropdown-item" href="#">중국어</a></li>
+
+                    </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--기념품 가게 지도-->
+    <div id="googleMap" style="width: 70%; height: 700px;"></div>
+    <!--경주빵-->
+    <div class="bread">
+    <h2>경주의 빵</h2>
+    {% if breads %}
+        <div class="row">
+        {% for bread in breads %}
+        <div class= "col-md-4">
+            <div class="card" style="width: 25rem;">
+            {% if bread.image %}
+            <img class="card-img-top" src="{{ bread.image}}" alt="{{ bread.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ bread.name }}</h5>
+                <p class="card-text">{{ bread.description }}</p>
+                <!--a href="#" class="btn btn-primary">Go somewhere</a1>-->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    {% else %}
+    <p>no bread</p>
+    {% endif %}
+    </div>
+    {% if shops %}
+        {% for shop in shops %}
+        <p>{{ shop.name  }}</p>
+        <p>{{ shop.address }}</p>
+        <p>{{ shop.business_hours }}</p>
+        {% if shop.image %}
+        <img src="{{ shop.image}}" alt="{{ shop.name }}">
+        {% endif %}
+        {% endfor %}
+    {% else %}
+    <p>no shop</p>
+    {% endif %}
+
+</body>
+</html>
+<style>
+    .bread {
+        text-align:center;
+        padding: 20px 30px;
+        background:#FEFBF5;
+    }
+
+    h2 {
+        padding: 20px 0; /* 상단과 하단에 20px의 패딩 적용 */
+    }
+
+    .card {
+        margin-top: 20px; /* 빵 요소의 상단에 20px의 마진 적용 */
+        margin-bottom: 20px; /* 빵 요소의 하단에 20px의 마진 적용 */
+        margin-left: 10px;
+        margin0-right: 10px;
+    }
+</style>
+<script>
+    window.initMap = function () {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 35.82216262817383, lng: 129.2528076171875 },
+          zoom: 13,
+        });
+      };
+</script>
