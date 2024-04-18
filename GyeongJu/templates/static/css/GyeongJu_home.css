@@ -1,0 +1,126 @@
+:root{
+
+}
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+.title{
+	font-weight: 900;
+	font-size: xx-large;
+	margin-left: 30px;
+	width:50%;
+	display: flex;
+	text-align: left;
+	align-items: center;
+	height:100%;
+}
+
+.home{
+	width: 3vw;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.home a p{
+	font-size: large;
+	font-weight: 800;
+	font-size: x-large;
+}
+.menu{
+	margin-left: 5%;
+	min-width:30vw;
+	display: flex;
+	justify-content: end;
+	margin-right:30px;
+	height: 100%;
+}
+.navbar {
+	overflow: hidden;
+	background: #FFFFFF;
+	height: 7vh;
+	width:50vw;
+	display: flex;
+	align-items: center;
+	margin-left: 25vw;
+}
+.navbar a {
+	float: left;
+	font-size: 16px;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.d {
+	float: left;
+	overflow: hidden;
+	margin-left: 7%;
+	min-width: 4vw;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+}
+.d .d-btn {
+	font-size: 16px;
+	border: none;
+	outline: none;
+	color: black;
+	padding: 14px 16px;
+	background: inherit;
+	text-transform: uppercase;
+	font-size: x-large;
+	font-weight: 800;
+	height:100%;
+}
+.navbar a:hover, .d:hover .d-btn {
+	background: #FFFFFF;
+}
+.d-content {
+	display: none;
+	position: absolute;
+	background: #f3f8f2;
+	top: 7vh;
+	width: 100%;
+	left: 0;
+	z-index: 10;
+}
+.d:hover .d-content {
+	display: block;
+}
+.column {
+	width: 200px;
+	padding: 10px;
+	background: #DEEBDA;
+	height: 400px;
+}
+.column a {
+	display: block;
+	float: none;
+	color: black;
+	text-align: left;
+}
+.column h3 {
+	color: black;
+	padding: 10px;
+}
+.column a:hover {
+	color: black;
+	background: #d3e2cd;
+}
+.row:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+@media(max-width: 650px){
+	.column {
+		width: 100%;
+		height: auto;
+	}
+}
