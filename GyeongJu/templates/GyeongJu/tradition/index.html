@@ -6,14 +6,29 @@
     <title>전통문화체험</title>
 </head>
 <body>
+    <h2>
+        {{ type }}
+    </h2>
     <ul>
         {% for item in data %}
             <li style="margin-bottom: 20px">
-                체험명 : {{ item.name }}<br>
-                설명 : {{ item.info }}<br>
+                {% if item.type == '전통문화체험' %}
+                <strong>체험명 : {{ item.name }}</strong><br>
+                {% else %}
+                <strong>업체명 : {{ item.name }}</strong><br>
+                {% endif %}
+                {% if item.info != '' %}
+                <p>설명 : {{ item.info }}</p>
+                {% endif %}
+                {% if item.call != '' %}
                 전화번호 : {{ item.call }}<br>
+                {% endif %}
+                {% if item.address != '' %}
                 <address>주소 : {{ item.address }}</address><br>
+                {% endif %}
+                {% if item.homepage != '' %}
                 홈페이지 : <a href="{{ item.homepage }}">{{ item.homepage }}</a>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>
