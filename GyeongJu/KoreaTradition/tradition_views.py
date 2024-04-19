@@ -11,12 +11,12 @@ def tradition_view(request):
         LanguageInfo.objects.filter(selected=True).update(selected=False)
         LanguageInfo.objects.filter(lang=cur_lang).update(selected=True)
         language = LanguageInfo.objects.all()
-        data = TraditionExperienceInfo.GetInfoByTypeLang(type_name=typename, language=cur_lang)
+        data = TraditionExperienceInfo.GetInfoByLangType(type_name=typename, language=cur_lang)
         return render(request, 'GyeongJu/tradition/index.html', {'data': data, 'type': typename, 'language': language})
     else:
-        get_lang = LanguageInfo.GetCurrentLanguage()
+        get_lang = LanguageInfo.GetCurrentLanguage().lang
         language = LanguageInfo.objects.all()
-        data = TraditionExperienceInfo.GetInfoByTypeLang(type_name=typename, language=get_lang.lang)
+        data = TraditionExperienceInfo.GetInfoByLangType(type_name=typename, language=get_lang)
         return render(request, 'GyeongJu/tradition/index.html', {'data': data, 'type': typename, 'language': language})
 
 @csrf_exempt
@@ -27,14 +27,12 @@ def clothes_view(request):
         LanguageInfo.objects.filter(selected=True).update(selected=False)
         LanguageInfo.objects.filter(lang=cur_lang).update(selected=True)
         language = LanguageInfo.objects.all()
-        data = TraditionExperienceInfo.GetInfoByTypeLang(type_name=typename, language=cur_lang)
+        data = TraditionExperienceInfo.GetInfoByLangType(type_name=typename, language=cur_lang)
         return render(request, 'GyeongJu/tradition/index.html', {'data': data, 'type': typename, 'language': language})
     else:
-        get_lang = LanguageInfo.GetCurrentLanguage()
-        print(get_lang)
+        get_lang = LanguageInfo.GetCurrentLanguage().lang
         language = LanguageInfo.objects.all()
-        print(language)
-        data = TraditionExperienceInfo.GetInfoByTypeLang(type_name=typename, language=get_lang.lang)
+        data = TraditionExperienceInfo.GetInfoByLangType(type_name=typename, language=get_lang)
         return render(request, 'GyeongJu/tradition/index.html', {'data': data, 'type': typename, 'language': language})
 
 @csrf_exempt
@@ -45,10 +43,10 @@ def accomodation_view(request):
         LanguageInfo.objects.filter(selected=True).update(selected=False)
         LanguageInfo.objects.filter(lang=cur_lang).update(selected=True)
         language = LanguageInfo.objects.all()
-        data = TraditionExperienceInfo.GetInfoByTypeLang(type_name=typename, language=cur_lang)
+        data = TraditionExperienceInfo.GetInfoByLangType(type_name=typename, language=cur_lang)
         return render(request, 'GyeongJu/tradition/index.html', {'data': data, 'type': typename, 'language': language})
     else:
-        get_lang = LanguageInfo.GetCurrentLanguage()
+        get_lang = LanguageInfo.GetCurrentLanguage().lang
         language = LanguageInfo.objects.all()
-        data = TraditionExperienceInfo.GetInfoByTypeLang(type_name=typename, language=get_lang.lang)
+        data = TraditionExperienceInfo.GetInfoByLangType(type_name=typename, language=get_lang)
         return render(request, 'GyeongJu/tradition/index.html', {'data': data, 'type': typename, 'language': language})
