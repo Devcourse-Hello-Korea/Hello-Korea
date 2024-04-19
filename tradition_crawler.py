@@ -6,14 +6,46 @@ from bs4 import BeautifulSoup
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Hello_Korea.settings")
 django.setup()
 
-from GyeongJu.KoreaTradition.models import TraditionExperienceInfo, TypeInfo
+from GyeongJu.KoreaTradition.models import TraditionExperienceInfo, TypeInfo, LanguageInfo
 from GyeongJu.KoreaTradition.experience_constant import *
 
 # DB 저장 함수
 def DataSave(names, descriptions, call, address, homepage, typeinfo):
     length = len(names)
+    
+    language = LanguageInfo(lang = 'ko', selected = True)
+    language.save()
     for i in range(length):
         culture_experience = TraditionExperienceInfo(
+            lang = language,
+            name = names[i],
+            info = descriptions[i],
+            call = call[i],
+            address = address[i],
+            homepage = homepage[i],
+            type = typeinfo,
+        )
+        culture_experience.save()
+
+    language = LanguageInfo(lang='en', selected=False)
+    language.save()
+    for i in range(length):
+        culture_experience = TraditionExperienceInfo(
+            lang = language,
+            name = names[i],
+            info = descriptions[i],
+            call = call[i],
+            address = address[i],
+            homepage = homepage[i],
+            type = typeinfo,
+        )
+        culture_experience.save()
+
+    language = LanguageInfo(lang = 'cn', selected = False)
+    language.save()
+    for i in range(length):
+        culture_experience = TraditionExperienceInfo(
+            lang = language,
             name = names[i],
             info = descriptions[i],
             call = call[i],

@@ -6,6 +6,20 @@
     <title>전통문화체험</title>
 </head>
 <body>
+    <nav>
+        <a href="http://127.0.0.1:8000/GyeongJu/Tradition">전통문화체험</a>
+        <a href="http://127.0.0.1:8000/GyeongJu/Tradition/clothes">의복체험</a>
+        <a href="http://127.0.0.1:8000/GyeongJu/Tradition/accomodation">고택체험</a>
+        <form action="" method="post" id="select_language">
+            {% csrf_token %}
+            <select name="select_language" id="language" onchange="this.form.submit()">
+                <option value="" disabled>언어 선택</option>
+                {% for item in language %}
+                <option value="{{ item.lang }}" id="{{ item.lang }}" {% if item.selected %} selected {% endif %}>{{ item.lang }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </nav>
     <h2>
         {{ type }}
     </h2>
