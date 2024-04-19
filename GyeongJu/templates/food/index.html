@@ -3,24 +3,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Food Data</title>
+    <title>GyeongJu Food</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
+        :root{
+            background:#FEFBF5;
+        }
         .korean {
             text-align:center;
             padding: 20px 30px;
-            background:#FEFBF5;
+            margin-bottom: 60px;
+            width:70vw;
+            margin: 0 auto;
         }
-    
-        h2 {
-            padding: 20px 0; /* 상단과 하단에 20px의 패딩 적용 */
+        .col-md-4{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h2{
+            font-size: xx-large;
+            font-weight: bolder;
         }
     
         .card {
-            margin-top: 20px; /* 빵 요소의 상단에 20px의 마진 적용 */
-            margin-bottom: 20px; /* 빵 요소의 하단에 20px의 마진 적용 */
-            margin-left: 10px;
-            margin-right: 10px;
+            margin: 20px 10px 20px 10px;
+            min-width: 20rem;
+            min-height: 12rem;
         }
     </style>
 </head>
@@ -32,7 +41,7 @@
             <div class="row">
             {% for k in korean %}
             <div class= "col-md-4">
-                <div class="card" style="width: 25rem;">
+                <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{ k.name }}</h5>
                     <p class="card-text">{{ k.address }}</p>
@@ -43,7 +52,73 @@
             {% endfor %}
             </div>
     {% else %}
-    <p>no bread</p>
+    <p>no korean food shop</p>
+    {% endif %}
+    </div>
+
+    <!-- 양식 -->
+    <div class="korean">
+        <h2>양식</h2>
+        {% if western %}
+            <div class="row">
+            {% for w in western %}
+            <div class= "col-md-4">
+                <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ w.name }}</h5>
+                    <p class="card-text">{{ w.address }}</p>
+                    <p class="card-text">{{ w.number }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+    {% else %}
+    <p>no western food shop</p>
+    {% endif %}
+    </div>
+
+    <!-- 일식 -->
+    <div class="korean">
+        <h2>일식</h2>
+        {% if japanese %}
+            <div class="row">
+            {% for j in japanese %}
+            <div class= "col-md-4">
+                <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ j.name }}</h5>
+                    <p class="card-text">{{ j.address }}</p>
+                    <p class="card-text">{{ j.number }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+    {% else %}
+    <p>no japanese food shop</p>
+    {% endif %}
+    </div>
+
+    <!-- 중식 -->
+    <div class="korean">
+        <h2>일식</h2>
+        {% if chinese %}
+            <div class="row">
+            {% for c in chinese %}
+            <div class= "col-md-4">
+                <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ c.name }}</h5>
+                    <p class="card-text">{{ c.address }}</p>
+                    <p class="card-text">{{ c.number }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+    {% else %}
+    <p>no japanese food shop</p>
     {% endif %}
     </div>
 
