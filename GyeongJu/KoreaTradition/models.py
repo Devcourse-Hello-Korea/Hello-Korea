@@ -27,7 +27,7 @@ class TraditionExperienceInfo(models.Model):
 
     # Lang, Type으로 정보를 얻을 수 있는 함수
     @classmethod
-    def GetInfoByType(cls, type_name, language):
+    def GetInfoByTypeLang(cls, type_name, language):
         try:
             # 해당 타입에 해당하는 TraditionExperienceInfo 객체들 필터링
             experience_info_list = cls.objects.filter(type__type=type_name, lang__lang=language)
