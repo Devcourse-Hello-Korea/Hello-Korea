@@ -1,5 +1,15 @@
 from django.db import models
 
+class LanguageInfo(models.Model):
+    lang = models.CharField(max_length=10, primary_key=True)
+    selected = models.BooleanField(default=False)
+    def __str__(self):
+        return self.lang
+    
+    @classmethod
+    def GetCurrentLanguage(cls):
+        return cls.objects.get(selected=True)
+
 class TypeInfo(models.Model):
     type = models.CharField(max_length=100, primary_key=True)
     
@@ -7,6 +17,7 @@ class TypeInfo(models.Model):
         return self.type
     
 class TraditionExperienceInfo(models.Model):
+    lang = models.ForeignKey(LanguageInfo, on_delete=models.CASCADE)
     type = models.ForeignKey(TypeInfo, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, primary_key=True)
     info = models.CharField(max_length=300, default='')
@@ -15,10 +26,10 @@ class TraditionExperienceInfo(models.Model):
     homepage = models.URLField(max_length=100, default='')
 
     @classmethod
-    def GetInfoByType(cls, type_name):
+    def GetInfoByType(cls, type_name, language):
         try:
             # 해당 타입에 해당하는 TraditionExperienceInfo 객체들 필터링
-            experience_info_list = cls.objects.filter(type__type=type_name)
+            experience_info_list = cls.objects.filter(type__type=type_name, lang__lang=language)
             
             # 필터링된 객체들의 정보를 담을 리스트 초기화
             result = []
