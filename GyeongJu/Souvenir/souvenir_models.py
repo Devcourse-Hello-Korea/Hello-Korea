@@ -1,6 +1,7 @@
 from django.db import models
 
 class Bread(models.Model):
+    lang = models.CharField(max_length=10)
     name = models.CharField(max_length=200)
     image = models.URLField(max_length=500, blank=True, null=True)
     description = models.TextField()
@@ -10,6 +11,7 @@ class Bread(models.Model):
     
 
 class Shop(models.Model):
+    lang = models.CharField(max_length=10)
     name = models.CharField(max_length=200)
     image = models.URLField(max_length=500, blank=True, null=True)
     address = models.CharField(max_length=300)
