@@ -1,17 +1,19 @@
 from django.http import HttpResponse
 from django.views.generic import View
 from django.shortcuts import render
-from .souvenir_models import Bread, Shop
+from .souvenir_models import Bread, Shop, ShopLocation
 
 
 class Souvenir(View):
     def get(self, request):
-        breads = Bread.objects.filter(pk__range=(1, 6))
-        shops = Shop.objects.filter(pk__range=(1,7))
+        breads = Bread.objects.filter()[:6]
+        shops = Shop.objects.all()
+        shop_locations = ShopLocation.objects.all()
 
         context = {
             'breads': breads,
-            'shops': shops
+            'shops': shops,
+            'shop_locations': shop_locations,
         }
 
         return render(

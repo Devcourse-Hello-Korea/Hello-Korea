@@ -1,53 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Souvenir</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/souvenir.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  </head>
-  <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"> </script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnJWIxkwpGTuCvn-My4Aiwc-m9Sh2jgNY&callback=console.debug&libraries=maps,marker&v=beta">
-    </script>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <nav class="navbar bg-body-tertiary">
-                <div class="container-fluid">
-                    <span class="navbar-brand mb-0 h1">Hello Korea!</span>
-                </div>
-            </nav>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">홈</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">경주</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">전주</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">순천</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Lauguage
-                    </a>
-                    <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">한국어</a></li>
-                    <li><a class="dropdown-item" href="#">English</a></li>
-                    <li><a class="dropdown-item" href="#">중국어</a></li>
-
-                    </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+</head>
+<body>
     <!--기념품 가게 지도-->
-    <div id="googleMap" style="width: 70%; height: 700px;"></div>
+    <h2>기념품 가게</h2>
+    <div id="googleMap"></div>
     <!--경주빵-->
     <div class="bread">
     <h2>경주의 빵</h2>
@@ -72,44 +37,33 @@
     <p>no bread</p>
     {% endif %}
     </div>
-    {% if shops %}
-        {% for shop in shops %}
-        <p>{{ shop.name  }}</p>
-        <p>{{ shop.address }}</p>
-        <p>{{ shop.business_hours }}</p>
-        {% if shop.image %}
-        <img src="{{ shop.image}}" alt="{{ shop.name }}">
-        {% endif %}
-        {% endfor %}
-    {% else %}
-    <p>no shop</p>
-    {% endif %}
+ 
+<script src="{% static "js/souvenir.js" %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"> </script>
+<script src="{% static "js/googlemap_api_key.js" %}"></script>
+<script>  
+        var scriptTag = document.createElement("script");
+        scriptTag.async = true;
+        scriptTag.src = "https://maps.googleapis.com/maps/api/js?key=" + apiKey + "&callback=initMap";
 
+        // scriptTag를 문서의 head에 추가합니다.
+        document.head.appendChild(scriptTag);
+
+        var shopLocations = [
+        {% for shop_location in shop_locations %}
+        {
+            shop: { 
+                name: "{{ shop_location.shop.name }}",
+                image: "{{ shop_location.shop.image }}",
+                business_hours: "{{ shop_location.shop.business_hours }}"
+            },
+            lat: {{ shop_location.lat }},
+            lng: {{ shop_location.lng }}
+        },
+        {% endfor %}
+        ];
+
+        
+</script>
 </body>
 </html>
-<style>
-    .bread {
-        text-align:center;
-        padding: 20px 30px;
-        background:#FEFBF5;
-    }
-
-    h2 {
-        padding: 20px 0; /* 상단과 하단에 20px의 패딩 적용 */
-    }
-
-    .card {
-        margin-top: 20px; /* 빵 요소의 상단에 20px의 마진 적용 */
-        margin-bottom: 20px; /* 빵 요소의 하단에 20px의 마진 적용 */
-        margin-left: 10px;
-        margin0-right: 10px;
-    }
-</style>
-<script>
-    window.initMap = function () {
-        const map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: 35.82216262817383, lng: 129.2528076171875 },
-          zoom: 13,
-        });
-      };
-</script>

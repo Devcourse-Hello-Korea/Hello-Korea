@@ -25,4 +25,4 @@ class ShopLocation(models.Model):
     lng = models.FloatField()
     
     def __str__(self):
-        return f'Location of {self.shop.name}'
+        return f'Location of {self.shop.name}\n'
