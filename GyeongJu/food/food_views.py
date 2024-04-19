@@ -4,6 +4,7 @@ from .food_data import *
 from django.shortcuts import render
 from .food_contants import *
 
+#차후 언어 변경시 수정 필요
 test_lang = 'en' #['ko', 'en', 'ja', 'zh-cn', 'zh-tw', 'de', 'ru']
 
 def food_index(request):
