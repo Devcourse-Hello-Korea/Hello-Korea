@@ -9,7 +9,7 @@ urlpatterns = [
     # localhost:8000/GyeongJu
     path('', views.index, name='index'),
     path('souvenir/', souvenir_views.Souvenir.as_view(), name='souvenir'),
-    path('Accomodation', accomodation_views.accomodation_view),
+    path('Accomodation', accomodation_views.accomodation_view, name="Accomodation"),
     path('food', food_views.food_index),
     path('food/korean', food_views.korean_food_view),
     path('food/western', food_views.western_food_view),
