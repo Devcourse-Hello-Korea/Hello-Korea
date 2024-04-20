@@ -1,0 +1,24 @@
+
+#googleMap {
+    width: 100%; 
+    height: 400px;
+    padding: 10px;
+}
+
+.bread {
+    text-align:center;
+    padding: 20px 30px;
+    background:#FEFBF5;
+}
+
+h2 {
+    padding: 20px 0; /* 상단과 하단에 20px의 패딩 적용 */
+    text-align: center;
+}
+
+.card {
+    margin-top: 20px; /* 빵 요소의 상단에 20px의 마진 적용 */
+    margin-bottom: 20px; /* 빵 요소의 하단에 20px의 마진 적용 */
+    margin-left: 10px;
+    margin-right: 10px;
+}
