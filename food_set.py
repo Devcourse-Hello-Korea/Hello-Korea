@@ -15,10 +15,19 @@ def food_data_set():
     western_food_model.objects.all().delete()
     japanese_food_model.objects.all().delete()
     chinese_food_model.objects.all().delete()
+    text_food_form.objects.all().delete()
     get_food_data(KOREAN_URL, 'korean', 1)#11
     get_food_data(WESTERN_URL, 'western', 1)#4
     get_food_data(JAPANESE_URL, 'japanese',1)#2
     get_food_data(CHINESE_URL, 'chinese',1)
+    food_form = text_food_form(
+        lang='ko', 
+        korean_text='한국 음식',
+        western_text='서양 음식',
+        japanese_text='일본 음식',
+        chinese_text='중국 음식',
+    )
+    food_form.save()
 
 languages = ['en', 'ja', 'zh-cn', 'zh-tw', 'de', 'ru'] #'ko'
 
@@ -28,8 +37,17 @@ def translate_all_data_food():
     western_data = western_food_model.objects.filter(lang='ko')
     japanese_data = japanese_food_model.objects.filter(lang='ko')
     chinese_data = chinese_food_model.objects.filter(lang='ko')
+    food_form = text_food_form.objects.filter(lang='ko').first()
     for lang in languages:
         time.sleep(random.random())
+        new_data = text_food_form(
+            lang=lang, 
+            korean_text=translator.translate(food_form.korean_text, src='ko', dest=lang).text,
+            western_text=translator.translate(food_form.western_text, src='ko', dest=lang).text,
+            japanese_text=translator.translate(food_form.japanese_text, src='ko', dest=lang).text,
+            chinese_text=translator.translate(food_form.chinese_text, src='ko', dest=lang).text,
+        )
+        new_data.save()
         for data in korean_data:
             time.sleep(0.3)
             new_data = korean_food_model(
