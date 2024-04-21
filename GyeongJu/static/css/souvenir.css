@@ -1,3 +1,6 @@
+:root{
+    background:#FEFBF5;
+}
 
 #googleMap {
     width: 100%; 
@@ -8,12 +11,20 @@
 .bread {
     text-align:center;
     padding: 20px 30px;
-    background:#FEFBF5;
+    margin-bottom: 60px;
+    width:70vw;
+    margin: 0 auto;
+}
+
+.col-md-4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 h2 {
-    padding: 20px 0; /* 상단과 하단에 20px의 패딩 적용 */
-    text-align: center;
+    font-size: xx-large;
+    font-weight: bolder;
 }
 
 .card {
@@ -21,4 +32,10 @@ h2 {
     margin-bottom: 20px; /* 빵 요소의 하단에 20px의 마진 적용 */
     margin-left: 10px;
     margin-right: 10px;
+    min-width: 20rem;
+    min-height: 12rem;
+}
+
+.card-title {
+    font-weight:700;
 }
