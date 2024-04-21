@@ -40,7 +40,7 @@
     <!-- 한식 -->
     {% if korean %}
     <div class="korean">
-        <h2>한식</h2>
+        <h2>{{food_form.korean_text}}</h2>
             <div class="row">
             {% for k in korean %}
             <div class= "col-md-4">
@@ -60,7 +60,7 @@
     <!-- 양식 -->
     {% if western %}
     <div class="korean">
-        <h2>양식</h2>
+        <h2>{{food_form.western_text}}</h2>
             <div class="row">
             {% for w in western %}
             <div class= "col-md-4">
@@ -80,7 +80,7 @@
     <!-- 일식 -->
     {% if japanese %}
     <div class="korean">
-        <h2>일식</h2>
+        <h2>{{food_form.japanese_text}}</h2>
             <div class="row">
             {% for j in japanese %}
             <div class= "col-md-4">
@@ -100,7 +100,7 @@
     <!-- 중식 -->
     {% if chinese %}
     <div class="korean">
-        <h2>일식</h2>
+        <h2>{{food_form.chinese_text}}</h2>
             <div class="row">
             {% for c in chinese %}
             <div class= "col-md-4">
