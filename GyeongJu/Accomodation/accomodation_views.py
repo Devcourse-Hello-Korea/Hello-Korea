@@ -5,10 +5,10 @@ from .accomodation_trans import translate_data
 
 def accomodation_view(request):
     global data
+    data = None
     form = Accomodation_Form()
-    #차후 언어 변경시 수정 필요
-    test_lang = 'ko' #['ko', 'en', 'ja', 'zh-cn', 'zh-tw', 'de', 'ru']
-    form_data = AccomodationForm_model.objects.filter(lang=test_lang).first()
+    lang = request.COOKIES.get('user_lang', 'ko')
+    form_data = AccomodationForm_model.objects.filter(lang=lang).first()
     if request.method == 'POST':
         selected_month = request.POST.get('month')
         selected_language = request.POST.get('Language')
@@ -16,7 +16,7 @@ def accomodation_view(request):
         print(selected_month, selected_language, action)
 
         if action == 'search':
-            data = AccomodationInfo.objects.filter(lang=test_lang, month=selected_month)
+            data = AccomodationInfo.objects.filter(lang=lang, month=selected_month)
 
         '''form = Accomodation_Form(request.POST)
         if form.is_valid():
