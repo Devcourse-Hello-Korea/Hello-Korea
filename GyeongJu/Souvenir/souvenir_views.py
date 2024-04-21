@@ -1,25 +1,27 @@
 from django.http import HttpResponse
 from django.views.generic import View
 from django.shortcuts import render
-from .souvenir_models import Bread, Shop, ShopLocation
-
-#차후 언어 변경시 수정 필요
-test_lang = 'ko' #['ko', 'en', 'ja', 'zh-cn', 'zh-tw', 'de', 'ru']
+from .souvenir_models import Bread, Shop, ShopLocation, text_souvenir_form
 
 class Souvenir(View):
     def get(self, request):
-        breads = Bread.objects.filter(lang=test_lang)[:6]
-        shops = Shop.objects.filter(lang=test_lang)[:7]
+        lang = request.COOKIES.get('user_lang', 'ko')
+        breads = Bread.objects.filter(lang=lang)[:6]
+        shops = Shop.objects.filter(lang=lang)[:7]
         shop_locations = ShopLocation.objects.filter()[:7]
+        form_text = text_souvenir_form.objects.filter(lang=lang).first()
 
         context = {
             'breads': breads,
             'shops': shops,
             'shop_locations': shop_locations,
+            'shop': form_text.shop, 
+            'bread': form_text.bread
         }
+
 
         return render(
             request,
             'souvenir/souvenir.html',
-            context
+            context,
         )
