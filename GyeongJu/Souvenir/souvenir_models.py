@@ -28,3 +28,8 @@ class ShopLocation(models.Model):
     
     def __str__(self):
         return f'Location of {self.shop.name}\n'
+    
+class text_souvenir_form(models.Model):
+    lang = models.CharField(max_length=10)
+    shop = models.CharField(max_length=50)
+    bread = models.CharField(max_length=50)
