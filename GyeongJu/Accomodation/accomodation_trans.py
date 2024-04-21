@@ -33,6 +33,7 @@ def set_accomodation_form():
     AccomodationForm_model.objects.all().delete()
     accomodation_form = AccomodationForm_model(
         lang='ko', 
+        name='숙소',
         no_results_text='결과가 없습니다.',
         link_text='링크',
         crawl_button_text='크롤링',
@@ -42,6 +43,7 @@ def set_accomodation_form():
     accomodation_form.save()
 
     for lang in languages:
+        translated_name = translator.translate(accomodation_form.name, src='ko', dest=lang).text
         translated_no_results_text = translator.translate(accomodation_form.no_results_text, src='ko', dest=lang).text
         translated_link_text = translator.translate(accomodation_form.link_text, src='ko', dest=lang).text
         translated_crawl_button_text = translator.translate(accomodation_form.crawl_button_text, src='ko', dest=lang).text
@@ -50,6 +52,7 @@ def set_accomodation_form():
 
         translated_form = AccomodationForm_model(
             lang=lang,
+            name=translated_name,
             no_results_text=translated_no_results_text,
             link_text=translated_link_text,
             crawl_button_text=translated_crawl_button_text,

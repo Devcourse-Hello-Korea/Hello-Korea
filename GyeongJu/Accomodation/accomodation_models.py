@@ -14,6 +14,7 @@ class AccomodationInfo(models.Model):
 
 class AccomodationForm_model(models.Model):
     lang = models.CharField(max_length=10)
+    name = models.CharField(max_length=10)
     no_results_text = models.CharField(max_length=100)
     link_text = models.CharField(max_length=100)
     crawl_button_text = models.CharField(max_length=100)
