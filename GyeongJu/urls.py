@@ -13,7 +13,7 @@ urlpatterns = [
     path('JeonJu/', views.jeonju_index, name='jeonju_index'),
     path('GyeongJu/Souvenir/', souvenir_views.Souvenir.as_view(), name='souvenir'),
     path('GyeongJu/Accomodation', accomodation_views.accomodation_view),
-    path('GyeongJu/Food', food_views.food_index),
+    path('GyeongJu/Food', food_views.foodIndex),
     path('GyeongJu/Food/korean', food_views.korean_food_view),
     path('GyeongJu/Food/western', food_views.western_food_view),
     path('GyeongJu/Food/japanese', food_views.japanese_food_view),

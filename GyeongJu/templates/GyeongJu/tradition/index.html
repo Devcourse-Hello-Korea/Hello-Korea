@@ -118,23 +118,23 @@
             <div class="col-auto">
                 <a href="http://127.0.0.1:8000/GyeongJu/Tradition"
                 style="display: inline-block; background-color: #DEEBDA; padding: 5px 10px; color:#000000; text-decoration: none; border: none; border-radius: 10px;">
-                # 전통문화체험</a>
+                # {{form_text.koreaTradition}}</a>
             </div>
             <div class="col-auto">
                 <a href="http://127.0.0.1:8000/GyeongJu/Tradition/clothes"
                 style="display: inline-block; background-color: #DEEBDA; padding: 5px 10px; color:#000000; text-decoration: none; border: none; border-radius: 10px;">
-                # 의복체험</a>
+                # {{form_text.clothTradition}}</a>
             </div>
             <div class="col-auto">
                 <a href="http://127.0.0.1:8000/GyeongJu/Tradition/accomodation"
                 style="display: inline-block; background-color: #DEEBDA; padding: 5px 10px; color:#000000; text-decoration: none; border: none; border-radius: 10px;">
-                # 고택체험</a>
+                # {{form_text.lodgeTradition}}</a>
             </div>
             <div class="col-auto">
                 <form action="" method="post" id="select_language">
                     {% csrf_token %}
                     <select name="select_language" id="language" onchange="this.form.submit()">
-                        <option value="" disabled>언어 선택</option>
+                        <option value="" disabled>Language</option>
                         {% for item in language %}
                         <option value="{{ item.lang }}" id="{{ item.lang }}" {% if item.selected %} selected {% endif %}>{{ item.lang }}</option>
                         {% endfor %}
@@ -157,14 +157,14 @@
                     <p class="card-text">{{ item.info }}</p>
                     {% endif %}
                     {% if item.call != '' %}
-                    <p class="card-text">전화번호 : {{ item.call }}</p>
+                    <p class="card-text">{{form_text.tel_num}} : {{ item.call }}</p>
                     {% endif %}
                     {% if item.address != '' %}
-                    <p class="card-text">주소 : {{ item.address }}</p>
+                    <p class="card-text">{{form_text.address_text}} : {{ item.address }}</p>
                     {% endif %}
                     {% if item.homepage != '' %}
                     <a href="{{ item.homepage }}" style="display: inline-block; background-color: #B9E3C6; padding: 5px 10px; color: #fff; text-decoration: none; border: none; border-radius: 10px;">
-                        홈페이지 가기
+                        {{form_text.homepage_text}}
                     </a>
                     
                     {% endif %}

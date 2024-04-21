@@ -74,3 +74,12 @@ class TraditionExperienceInfo(models.Model):
         except cls.DoesNotExist:
             # 해당 타입에 해당하는 정보가 없을 경우 빈 리스트 반환
             return []
+
+class Tradition_form(models.Model):
+    lang = models.CharField(max_length=10)
+    koreaTradition = models.CharField(max_length=100)
+    clothTradition = models.CharField(max_length=100)
+    lodgeTradition = models.CharField(max_length=100)
+    tel_num = models.CharField(max_length=100)
+    address_text = models.CharField(max_length=100)
+    homepage_text = models.CharField(max_length=100)
