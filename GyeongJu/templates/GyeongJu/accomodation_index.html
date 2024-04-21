@@ -1,18 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GyeongJu Accomodation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body{
+            background:#FEFBF5;
+        }
+        .korean {
+            text-align:center;
+            padding: 20px 30px;
+            margin-bottom: 60px;
+            width:70vw;
+            margin: 0 auto;
+        }
+        .col-md-4{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h2{
+            font-size: xx-large;
+            font-weight: bolder;
+            text-align: center;
+            margin-top: 40px;
+        }
+    
+        .card {
+            margin: 20px 10px 20px 10px;
+            min-width: 20rem;
+            min-height: 12rem;
+        }
+        .card-title {
+            font-weight:700;
+        }
+        .card-img-top{
+            margin-bottom: 15px;
+        }
+        .form_div{
+            width:40vw;
+            margin: 0 auto;
+            height:5vh;
+            margin-top: 50px;
+        }
+        .form-select{
+            float:left;
+            width:40%;
+            border: 1px solid black;
+            margin-left: 3%;
+            
+        }
+        .btn{
+            margin-left: 3%;
+            background-color: #649aff;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ form_data.page_title }}</h1>
-    <form method="post">
+    <h2>숙소</h2>
+    <form method="post" enctype= "multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="action" value="search">{{ form_data.search_button_text }}</button>
-        <button type="submit" name="action" value="crawl">{{ form_data.crawl_button_text }}</button>
-        <br>
-        <button type="submit" name="action" value="translate">Translate</button>
-        #This may take some time
+        {% load item %}
+        <div class="form_div">
+            <select class="form-select" name="month">
+                <option selected>Select month:</option>
+                {% for month_choice in form.month %}
+                    <option type="text" value="{{ month_choice|return_value }}">{{ month_choice|return_item }}</option>
+                {% endfor %}
+            </select>
+            
+            <select class="form-select" name="Language">
+                <option selected>Language:</option>
+                {% for country_choice in form.country %}
+                    <option value="{{ country_choice|return_value }}">{{ country_choice|return_item }}</option>
+                {% endfor %}
+            </select>
+    
+            <button class="btn btn-primary" type="submit" name="action" value="search">{{ form_data.search_button_text }}</button>
+        </div>
     </form>
+
+    {% if data %}
+    <div class="korean">
+            <div class="row">
+                {% for item in data %}
+                <div class= "col-md-4">
+                    <div class="card">
+                    <div class="card-body">
+                        {% if item.img_src1 %}
+                        <img class="card-img-top" src="{{ item.img_src1 }}" alt="{{ item.name }}">
+                        {% endif %}
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.location }}</p>
+                        <p class="card-text"><a href="{{ item.link }}">{{ form_data.link_text }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+        <li>{{ form_data.no_results_text }}</li>
+    {% endif %}
+    </div>
+
+    <!--
     <ul>
         {% if data %}
             {% for item in data %}
@@ -30,5 +123,7 @@
             <li>{{ form_data.no_results_text }}</li>
         {% endif %}
     </ul>
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"> </script>
 </body>
 </html>
