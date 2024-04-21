@@ -17,7 +17,7 @@ class TypeInfo(models.Model):
         return self.type
     
 class TraditionExperienceInfo(models.Model):
-    lang = models.ForeignKey(LanguageInfo, on_delete=models.CASCADE)
+    lang = models.ForeignKey(LanguageInfo, on_delete=models.CASCADE, to_field='lang')
     type = models.ForeignKey(TypeInfo, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, primary_key=True)
     info = models.CharField(max_length=300, default='')
@@ -27,7 +27,7 @@ class TraditionExperienceInfo(models.Model):
 
     # Lang, Type으로 정보를 얻을 수 있는 함수
     @classmethod
-    def GetInfoByType(cls, type_name, language):
+    def GetInfoByLangType(cls, type_name, language):
         try:
             # 해당 타입에 해당하는 TraditionExperienceInfo 객체들 필터링
             experience_info_list = cls.objects.filter(type__type=type_name, lang__lang=language)
@@ -52,10 +52,10 @@ class TraditionExperienceInfo(models.Model):
         
     # Type으로 정보를 얻는 함수.
     @classmethod
-    def GetInfoByType(cls, type_name):
+    def GetInfoByLang(cls, language):
         try:
             # 해당 타입에 해당하는 TraditionExperienceInfo 객체들 필터링
-            experience_info_list = cls.objects.filter(type__type=type_name)
+            experience_info_list = cls.objects.filter(lang__lang=language)
             
             # 필터링된 객체들의 정보를 담을 리스트 초기화
             result = []

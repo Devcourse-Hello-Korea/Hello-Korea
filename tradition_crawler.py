@@ -2,6 +2,7 @@ import os
 import django
 import requests
 from bs4 import BeautifulSoup
+from googletrans import Translator
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Hello_Korea.settings")
 django.setup()
@@ -11,6 +12,7 @@ from GyeongJu.KoreaTradition.experience_constant import *
 
 # DB 저장 함수
 def DataSave(names, descriptions, call, address, homepage, typeinfo):
+    translator = Translator()
     length = len(names)
     
     language = LanguageInfo(lang = 'ko', selected = True)
@@ -32,24 +34,10 @@ def DataSave(names, descriptions, call, address, homepage, typeinfo):
     for i in range(length):
         culture_experience = TraditionExperienceInfo(
             lang = language,
-            name = names[i],
-            info = descriptions[i],
+            name = translator.translate(names[i], src='ko', dest='en').text,
+            info = translator.translate(descriptions[i], src='ko', dest='en').text,
             call = call[i],
-            address = address[i],
-            homepage = homepage[i],
-            type = typeinfo,
-        )
-        culture_experience.save()
-
-    language = LanguageInfo(lang = 'cn', selected = False)
-    language.save()
-    for i in range(length):
-        culture_experience = TraditionExperienceInfo(
-            lang = language,
-            name = names[i],
-            info = descriptions[i],
-            call = call[i],
-            address = address[i],
+            address = translator.translate(address[i], src='ko', dest='en').text,
             homepage = homepage[i],
             type = typeinfo,
         )
