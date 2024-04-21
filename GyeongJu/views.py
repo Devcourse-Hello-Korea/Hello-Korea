@@ -8,7 +8,7 @@ def gyeongju_index(request):
     return render(request, 'GyeongJu_Home.html')
 
 def sooncheon_index(request):
-    return render(request, 'Jeonju_Home.html')
+    return render(request, 'Sooncheon_Home.html')
 
 def jeonju_index(request):
-    return render(request, 'Sooncheon_Home.html')
+    return render(request, 'Jeonju_Home.html')
