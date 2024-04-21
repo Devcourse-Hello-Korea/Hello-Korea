@@ -3,12 +3,16 @@ import django
 import requests
 from bs4 import BeautifulSoup
 from googletrans import Translator
+import time, random
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Hello_Korea.settings")
 django.setup()
 
-from GyeongJu.KoreaTradition.models import TraditionExperienceInfo, TypeInfo, LanguageInfo
+from GyeongJu.KoreaTradition.models import TraditionExperienceInfo, TypeInfo, LanguageInfo, Tradition_form
 from GyeongJu.KoreaTradition.experience_constant import *
+
+languages = ['en', 'ja', 'zh-cn', 'zh-tw', 'de', 'ru']
+
 
 # DB 저장 함수
 def DataSave(names, descriptions, call, address, homepage, typeinfo):
@@ -28,20 +32,44 @@ def DataSave(names, descriptions, call, address, homepage, typeinfo):
             type = typeinfo,
         )
         culture_experience.save()
-
-    language = LanguageInfo(lang='en', selected=False)
-    language.save()
-    for i in range(length):
-        culture_experience = TraditionExperienceInfo(
-            lang = language,
-            name = translator.translate(names[i], src='ko', dest='en').text,
-            info = translator.translate(descriptions[i], src='ko', dest='en').text,
-            call = call[i],
-            address = translator.translate(address[i], src='ko', dest='en').text,
-            homepage = homepage[i],
-            type = typeinfo,
+        form_text = Tradition_form(
+            lang='ko',
+            koreaTradition = '전통문화 체험',
+            clothTradition = '옷 착의 체험',
+            lodgeTradition = '고택 체험',
+            tel_num = '전화번호',
+            address_text = '주소',
+            homepage_text = '홈페이지 가기',
         )
-        culture_experience.save()
+        form_text.save()
+
+    for lang in languages:
+        time.sleep(random.random())
+        new_data = Tradition_form(
+            lang=lang, 
+            koreaTradition = translator.translate(form_text.koreaTradition, src='ko', dest=lang).text,
+            clothTradition = translator.translate(form_text.clothTradition, src='ko', dest=lang).text,
+            lodgeTradition = translator.translate(form_text.lodgeTradition, src='ko', dest=lang).text,
+            tel_num = translator.translate(form_text.tel_num, src='ko', dest=lang).text,
+            address_text = translator.translate(form_text.address_text, src='ko', dest=lang).text,
+            homepage_text = translator.translate(form_text.homepage_text, src='ko', dest=lang).text,
+        )
+        new_data.save()
+
+        language = LanguageInfo(lang=lang, selected=False)
+        language.save()
+        for i in range(length):
+            time.sleep(0.1)
+            culture_experience = TraditionExperienceInfo(
+                lang = language,
+                name = translator.translate(names[i], src='ko', dest=lang).text,
+                info = translator.translate(descriptions[i], src='ko', dest=lang).text,
+                call = call[i],
+                address = translator.translate(address[i], src='ko', dest=lang).text,
+                homepage = homepage[i],
+                type = typeinfo,
+            )
+            culture_experience.save()
 
 # 전통문화체험에 쓰이는 크롤러
 def ListCrawler(url):
