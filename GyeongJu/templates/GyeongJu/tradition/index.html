@@ -134,17 +134,6 @@
                 style="display: inline-block; background-color: #DEEBDA; padding: 5px 10px; color:#000000; text-decoration: none; border: none; border-radius: 10px;">
                 # {{form_text.lodgeTradition}}</a>
             </div>
-            <div class="col-auto">
-                <form action="" method="post" id="select_language">
-                    {% csrf_token %}
-                    <select name="select_language" id="language" onchange="this.form.submit()">
-                        <option value="" disabled>Language</option>
-                        {% for item in language %}
-                        <option value="{{ item.lang }}" id="{{ item.lang }}" {% if item.selected %} selected {% endif %}>{{ item.lang }}</option>
-                        {% endfor %}
-                    </select>
-                </form>
-            </div>
         </div>
     </nav>
     
