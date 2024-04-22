@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/GyeongJu_home.css' %}">
 </head>
 <body>
-	<header class="header">
+	<header class="hk_header">
 		<div class="header_inner">
 			<h1 class="title">
 				<a href="/" class="home_link">
@@ -25,41 +25,45 @@
 					<span class="bar"></span>
 					<ul class="menu">
 						<li class="item" id="gyeongju">
-							<strong class="category"><a href="/GyeongJu">경주</a></strong>
+							<strong class="category"><a href="/GyeongJu">Gyeong Ju</a></strong>
 							<div class="column" id="gyeongju_column">
-								<a href="/GyeongJu/Accomodation" class="link">숙소</a>
-								<a href="/GyeongJu/Food" class="link">음식</a>
-								<a href="/GyeongJu/Tradition" class="link">전통체험</a>
-								<a href="/GyeongJu/Souvenir" class="link">기념품</a>
+								<a href="/GyeongJu/Accomodation" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="/GyeongJu/Food" class="link">{{hard_coded.Food_text}}</a>
+								<a href="/GyeongJu/Tradition" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="/GyeongJu/Souvenir" class="link">{{hard_coded.Souvenir_text}}</a>
 							</div>
 						</li>
 						<li class="item" id="suncheon">
-							<strong class="category"><a href="/SoonCheon">순천</a></strong>
+							<strong class="category"><a href="/SoonCheon">Sun Cheon</a></strong>
 							<div class="column" id="suncheon_column">
-								<a href="" class="link">숙소</a>
-								<a href="" class="link">음식</a>
-								<a href="" class="link">전통체험</a>
-								<a href="" class="link">기념품</a>
+								<a href="" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="" class="link">{{hard_coded.Food_text}}</a>
+								<a href="" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="" class="link">{{hard_coded.Souvenir_text}}</a>
 							</div>
 						</li>
 						<li class="item" id="jeonju">
-							<strong class="category"><a href="/JeonJu">전주</a></strong>
+							<strong class="category"><a href="/JeonJu">Jeon Ju</a></strong>
 							<div class="column" id="jeonju_column">
-								<a href="" class="link">숙소</a>
-								<a href="" class="link">음식</a>
-								<a href="" class="link">전통체험</a>
-								<a href="" class="link">기념품</a>
+								<a href="" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="" class="link">{{hard_coded.Food_text}}</a>
+								<a href="" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="" class="link">{{hard_coded.Souvenir_text}}</a>
 							</div>
 						</li>
 						<li class="item" id="language">
 							<!-- <form action="" method="post" id="select_language"> -->
 								{% csrf_token %}
 								<label for="lang" class="blind">언어 선택</label>
-								<select name="select_language" id="lang" class="select_lang">
-									<option value="ko" id="ko">ko</option>
-									<option value="en" id="en">en</option>
-									<option value="jp" id="jp">jp</option>
-									<option value="cn" id="cn">cn</option>
+								<select onchange="if(this.value) location.href=(this.value);" class="select_lang">
+                                    <option>Select Language</option>
+									<option value="/set_language/?lang_c=ko">한국어</option>
+									<option value="/set_language/?lang_c=en">English</option>
+									<option value="/set_language/?lang_c=ja">日本語</option>
+									<option value="/set_language/?lang_c=zh-tw">繁體字</option>
+									<option value="/set_language/?lang_c=zh-cn">簡體字</option>
+									<option value="/set_language/?lang_c=de">Deutsch</option>
+									<option value="/set_language/?lang_c=ru">русский</option>
 								</select>
 							<!-- </form> -->
 						</li>
@@ -71,11 +75,11 @@
 	<main class="main">
 		<div class="text_wrap">
 			<p class="desc">
-				<strong style="font-size: 24px;">'Hello Korea'</strong> 는<br>
-				K-POP이 전세계에 유명해지면서 한국에 대한 관심도가 올라가고 있습니다. 그러나 관광객은 그만큼 증가하지는 않았습니다.<br>
-				때문에 외국인 관광객들에게 잘 알려지지 않은 한국의 숨겨진 아름다운 도시들을 소개하고 도시의 여행 정보를 한눈에 보기 쉽게 만들어 한국 여행지의 매력을 알리려는 웹서비스입니다.
-				<br>도시의 정보를 수집하기 위해 다양한 웹사이트를 크롤링하여 숙소, 음식, 문화체험, 기념품 정보를 시각화하여 제공합니다.
-				<br>또한, 영어, 중국어, 일본어를 포함한 총 7가지 언어로 모든 페이지가 번역 가능하므로 다양한 나라의 관광객이 간편하게 접근할 수 있습니다.
+				<strong style="font-size: 24px;">'Hello Korea'</strong><br>
+				{{hard_coded.Main_Gyeongju_text1}}<br>
+				{{hard_coded.Main_Gyeongju_text2}}
+				<br>{{hard_coded.Main_Gyeongju_text3}}
+				<br>{{hard_coded.Main_Gyeongju_text4}}
 			</p>
 		</div>
 	</main>

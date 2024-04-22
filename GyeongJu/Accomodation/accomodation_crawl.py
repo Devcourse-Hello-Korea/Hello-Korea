@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 from datetime import datetime, timedelta
 from .accomodation_trans import translate_all_data
+from django.db import IntegrityError
 
 def date_inputs(driver, path, date):
     date_input = driver.find_element(By.XPATH, path)
@@ -26,7 +27,8 @@ def process_accomodation_tab(driver, tabs_container_xpath, checkin_date):
     accomodation_month = month_str
     AccomodationInfo.objects.filter(month=accomodation_month).delete()
     #for i in range(4, num_of_tabs + 4):
-    for i in range(4, 5 + 4):
+    plus = 4
+    for i in range(4, 5 + plus):
         # 탭 클릭
         tab_xpath = f'{tabs_container_xpath}/div[{i}]'
         wait = WebDriverWait(driver, 10)
@@ -71,14 +73,18 @@ def process_accomodation_tab(driver, tabs_container_xpath, checkin_date):
             except NoSuchElementException:
                 accomodation_link = ""
         # Django 모델에 저장
-        accomodation_info = AccomodationInfo(lang = 'ko',
-                                             location=accomodation_location, name=accomodation_name, 
-                                             month=accomodation_month, link = accomodation_link,
-                                             img_src1 = accomodation_img_srcs[0],
-                                             img_src2 = accomodation_img_srcs[1],
-                                             img_src3 = accomodation_img_srcs[2],
-                                             )
-        accomodation_info.save()
+        try:
+            accomodation_info = AccomodationInfo(lang = 'ko',
+                                                location=accomodation_location, name=accomodation_name, 
+                                                month=accomodation_month, link = accomodation_link,
+                                                img_src1 = accomodation_img_srcs[0],
+                                                img_src2 = accomodation_img_srcs[1],
+                                                img_src3 = accomodation_img_srcs[2],
+                                                )
+            accomodation_info.save()
+        except IntegrityError:
+            plus += 1
+            continue
 
 def set_dates_and_crawl(selected_month):
     url = "https://www.google.com/travel/search?q=%EA%B2%BD%EC%A3%BC%20%EC%88%99%EC%86%8C&g2lb=2503771%2C2503781%2C4284970%2C4291517%2C4814050%2C4874190%2C4893075%2C4965990%2C72277293%2C72302247%2C72317059%2C72406588%2C72414906%2C72421566%2C72458066%2C72462234%2C72470440%2C72470899%2C72471280%2C72472051%2C72473841%2C72481458%2C72485656%2C72485658%2C72486593%2C72494250%2C72513422%2C72513513%2C72523972%2C72530239%2C72534000%2C72536387%2C72538597%2C72549171%2C72549174%2C72561417%2C72561423&hl=ko-KR&gl=kr&ssta=1&ts=CAESCgoCCAMKAggDEAAaHhIcEhQKBwjoDxAEGA8SBwjoDxAEGBAYATIECAAQACoHCgU6A0tSVw&qs=CAAgACgA&ap=KigKEglWdogmq6tBQBF8kGVhiiRgQBISCXPseYl8GUJAEXyQZSH_OmBAMABoAQ&ictx=111&ved=0CAAQ5JsGahcKEwjAxZq6k7-FAxUAAAAAHQAAAAAQdw"
