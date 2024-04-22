@@ -4,7 +4,7 @@ from .food_data import *
 from django.shortcuts import render
 from .food_contants import *
 
-def food_index(request):
+def foodIndex(request):
     lang = request.COOKIES.get('user_lang', 'ko')
     if request.method == 'GET':
         korean_data = korean_food_model.objects.filter(lang = lang)
