@@ -96,12 +96,16 @@
                             <!-- <form action="" method="post" id="select_language"> -->
                                 {% csrf_token %}
                                 <label for="lang" class="blind">언어 선택</label>
-                                <select name="select_language" id="lang" class="select_lang">
-                                    <option value="ko" id="ko">ko</option>
-                                    <option value="en" id="en">en</option>
-                                    <option value="jp" id="jp">jp</option>
-                                    <option value="cn" id="cn">cn</option>
-                                </select>
+								<select onchange="if(this.value) location.href=(this.value);">
+                                    <option>Select Language</option>
+									<option value="/set_language/?lang_c=ko">한국어</option>
+									<option value="/set_language/?lang_c=en">English</option>
+									<option value="/set_language/?lang_c=ja">日本語</option>
+									<option value="/set_language/?lang_c=zh-tw">繁體字</option>
+									<option value="/set_language/?lang_c=zh-cn">簡體字</option>
+									<option value="/set_language/?lang_c=de">Deutsch</option>
+									<option value="/set_language/?lang_c=ru">русский</option>
+								</select>
                             <!-- </form> -->
                         </li>
                     </ul>
