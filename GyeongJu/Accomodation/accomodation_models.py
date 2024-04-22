@@ -2,7 +2,7 @@ from django.db import models
 
 class AccomodationInfo(models.Model):
     lang = models.CharField(max_length=10)
-    location = models.CharField(max_length=200)
+    location = models.CharField(max_length=200, unique=True)
     name = models.CharField(max_length=100)
     month = models.CharField(max_length=4)
     link = models.URLField(max_length=300)
