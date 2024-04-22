@@ -3,11 +3,18 @@ from .accomodation_models import AccomodationInfo, AccomodationForm_model
 from .accomodation_forms import Accomodation_Form
 from .accomodation_trans import translate_data
 
+import os, django
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Hello_Korea.settings")
+django.setup()
+from GyeongJu.models import hard_coded_text
+
 def accomodation_view(request):
     global data
     data = None
     form = Accomodation_Form()
     lang = request.COOKIES.get('user_lang', 'ko')
+    text_data=hard_coded_text.objects.filter(lang = lang).first()
     form_data = AccomodationForm_model.objects.filter(lang=lang).first()
     if request.method == 'POST':
         selected_month = request.POST.get('month')
@@ -27,4 +34,4 @@ def accomodation_view(request):
 
     else:
         form = Accomodation_Form()
-    return render(request, 'GyeongJu/accomodation_index.html', {'form' : form, 'data': data, 'form_data': form_data})
+    return render(request, 'GyeongJu/accomodation_index.html', {'form' : form, 'data': data, 'form_data': form_data, 'hard_coded': text_data})
