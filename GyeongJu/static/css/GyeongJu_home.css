@@ -181,8 +181,7 @@ html, body {
     }
 }
 .footer {
-	height: 40px;
-	padding: 20px;
+	padding: 10px 20px;
 	background-color: #f8f9fa;
 	border-top: 1px solid #e9ecef;
 	text-align: center;
@@ -192,10 +191,11 @@ html, body {
 	margin: 0 auto;
 }
 .developer_list {
-	margin-top: 8px;
+	margin: 8px 0 0;
 }
 .developer_list dt {
 	display: inline;
+	font-weight: 500;
 }
 .developer_list dd {
 	display: inline;
