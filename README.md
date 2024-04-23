@@ -44,3 +44,25 @@ K-pop과 K콘텐츠의 인기로 한국에 대한 관심이 전 세계적으로 
 |안중현|작성 예정|https://github.com/ImJoongHyeon|
 |유준상|작성 예정|https://github.com/Pikiss-personal|
 |주경연|작성 예정|https://github.com/Kyoung-yeon99|
+
+
+---------------------
+
+### 6. 구동 방법
+
+1. 필요한 라이브러리 pip install
+(beautifulsoup4==4.12.3, Django==5.0.4, googletrans==4.0.0rc1, requests==2.31.0, selenium==4.19.0, webdriver-manager==4.0.1)
+
+2. 페이지 텍스트 설정
+(python accomodation_set.py 0, python hard_coded_set.py)
+
+3. 필요한 데이터 크롤링
+(python accomodation_set.py n,  python food_set.py, python souvenir_crawl.py, python tradition_crawler.py)
+*(n은 현재 달부터 +10달까지의 숫자입니다. 4월이면 2~12)
+
+4. 페이지 작동
+(python manage.py runserver)
+
+<br>
+
+-----------------------------------
