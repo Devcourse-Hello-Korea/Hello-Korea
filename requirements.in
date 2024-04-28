@@ -1,0 +1,11 @@
+# In order to add, delete or modify a dependency, please update
+# the reference here and then run:
+# pip install pip-tools
+# - `pip-compile --rebuild requirements.in`
+
+beautifulsoup4==4.12.3
+Django==5.0.4
+googletrans==4.0.0rc1
+requests==2.31.0
+selenium==4.19.0
+webdriver-manager==4.0.1
