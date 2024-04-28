@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GyeongJu Accomodation</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/GyeongJu_home.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        @import url('../../static/css/reset.css');
+        body{
+            background:#FFFFFF;
+        }
+        .korean {
+            text-align:center;
+            padding: 20px 30px;
+            margin-bottom: 60px;
+            width:70vw;
+            margin: 0 auto;
+        }
+        .col-md-4{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h2{
+            font-size: xx-large;
+            font-weight: bolder;
+            text-align: center;
+            margin-top: 40px;
+        }
+    
+        .card {
+            margin: 20px 10px 20px 10px;
+            min-width: 20rem;
+            min-height: 12rem;
+        }
+        .card-title {
+            font-weight:700;
+        }
+        .card-img-top{
+            margin-bottom: 15px;
+        }
+        .form_div{
+            width:28vw;
+            margin: 0 auto;
+            height:5vh;
+            margin-top: 50px;
+        }
+        .form-select{
+            float:left;
+            width:75%;
+            margin-left: 3%;
+            
+        }
+        .btn{
+            margin-left: 3%;
+            background-color: #649aff;
+        }
+        .li_class{
+            height: 70vh;
+        }
+        .select_lang {
+            width: 40px;
+            margin-left: 10px;
+            border: 0;
+            background-color: #f8f9fa;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 38px;
+            text-align: center;
+            appearance: none;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hk_header">
+		<div class="header_inner">
+			<h1 class="title">
+				<a href="/" class="home_link">
+					<span class="blind">Hello Korea !</span>
+					<img src="{% static 'images/Hello-Korea.png' %}" class="home_img">
+				</a>
+			</h1>
+			<nav class="navbar">
+				<div class="toggle">
+					<input type="checkbox" class="hamburger_btn">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<ul class="menu">
+						<li class="item" id="gyeongju">
+							<strong class="category"><a href="/GyeongJu">Gyeong Ju</a></strong>
+							<div class="column" id="gyeongju_column">
+								<a href="/GyeongJu/Accomodation" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="/GyeongJu/Food" class="link">{{hard_coded.Food_text}}</a>
+								<a href="/GyeongJu/Tradition" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="/GyeongJu/Souvenir" class="link">{{hard_coded.Souvenir_text}}</a>
+							</div>
+						</li>
+						<li class="item" id="suncheon">
+							<strong class="category"><a href="/SoonCheon">Sun Cheon</a></strong>
+							<div class="column" id="suncheon_column">
+								<a href="" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="" class="link">{{hard_coded.Food_text}}</a>
+								<a href="" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="" class="link">{{hard_coded.Souvenir_text}}</a>
+							</div>
+						</li>
+						<li class="item" id="jeonju">
+							<strong class="category"><a href="/JeonJu">Jeon Ju</a></strong>
+							<div class="column" id="jeonju_column">
+								<a href="" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="" class="link">{{hard_coded.Food_text}}</a>
+								<a href="" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="" class="link">{{hard_coded.Souvenir_text}}</a>
+							</div>
+						</li>
+						<li class="item" id="language">
+							<!-- <form action="" method="post" id="select_language"> -->
+								{% csrf_token %}
+								<label for="lang" class="blind">언어 선택</label>
+								<select onchange="if(this.value) location.href=(this.value);" class="select_lang">
+                                    <option>Select Language</option>
+									<option value="/set_language/?lang_c=ko">한국어</option>
+									<option value="/set_language/?lang_c=en">English</option>
+									<option value="/set_language/?lang_c=ja">日本語</option>
+									<option value="/set_language/?lang_c=zh-tw">繁體字</option>
+									<option value="/set_language/?lang_c=zh-cn">簡體字</option>
+									<option value="/set_language/?lang_c=de">Deutsch</option>
+									<option value="/set_language/?lang_c=ru">русский</option>
+								</select>
+							<!-- </form> -->
+						</li>
+					</ul>
+				</div>
+			</nav>	
+		</div>
+	</header>
+    
+    <h2>{{form_data.name}}</h2>
+    <form method="post" enctype= "multipart/form-data">
+        {% csrf_token %}
+        {% load item %}
+        <div class="form_div">
+            <select class="form-select" name="month">
+                <option selected>Select month:</option>
+                {% for month_choice in form.month %}
+                    <option type="text" value="{{ month_choice|return_value }}">{{ month_choice|return_item }}</option>
+                {% endfor %}
+            </select>
+
+    
+            <button class="btn btn-primary" type="submit" name="action" value="search">{{ form_data.search_button_text }}</button>
+        </div>
+    </form>
+
+    {% if data %}
+    <div class="korean">
+            <div class="row">
+                {% for item in data %}
+                <div class= "col-md-4">
+                    <div class="card">
+                    <div class="card-body">
+                        {% if item.img_src1 %}
+                        <img class="card-img-top" src="{{ item.img_src1 }}" alt="{{ item.name }}">
+                        {% endif %}
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.location }}</p>
+                        <p class="card-text"><a href="{{ item.link }}">{{ form_data.link_text }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% else %}
+        <li class = "li_class">{{ form_data.no_results_text }}</li>
+    {% endif %}
+    </div>
+
+    <!--
+    <ul>
+        {% if data %}
+            {% for item in data %}
+                <li>
+                    {{ item.name }}: [{{ item.location }}]
+                    <br>
+                    <a href="{{ item.link }}">{{ form_data.link_text }}</a>
+                    <br>
+                    <img src="{{ item.img_src1 }}" style="width:100px; height:auto;">
+                    <img src="{{ item.img_src2 }}" style="width:100px; height:auto;">
+                    <img src="{{ item.img_src3 }}" style="width:100px; height:auto;">
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>{{ form_data.no_results_text }}</li>
+        {% endif %}
+    </ul>
+    -->
+
+    <footer class="footer">
+		<div class="footer_wrap">
+			<strong class="title">Hello Korea!</strong>
+			<dl class="developer_list">
+				<dt>개발자 : </dt>
+				<dd>유준상</dd>
+				<dd>주경연</dd>
+				<dd>문소정</dd>
+				<dd>안중현</dd>
+			</dl>
+		</div>
+	</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"> </script>
+</body>
+</html>

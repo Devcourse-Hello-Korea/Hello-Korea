@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Things to Do</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/GyeongJu_home.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        background-color: #FFFFFF;
+    }
+    .experience {
+        text-align:center;
+        padding: 20px 30px;
+        margin-bottom: 60px;
+        width:70vw;
+        margin: 0 auto;
+    }
+    .col-md-4{
+        display: flex;
+        align-items: stretch;
+    }
+    h2{
+        font-size: xx-large;
+        font-weight: bolder;
+    }
+
+    .card {
+        margin: 20px 10px 20px 10px;
+        min-width: 20rem;
+        min-height: 12rem;
+        display: flex;
+        flex-direction: column; /* 내부 요소들을 세로로 쌓습니다. */
+        justify-content: space-between; 
+    }
+    .card-title {
+        font-weight:700;
+    }
+
+    .card-text {
+        text-align:left;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%; /* 카드 내용을 균등하게 분배합니다. */
+    }
+</style>
+<body>
+    <!--Header 헤더 네비게이션 바 -->
+    <header class="hk_header">
+        <div class="header_inner">
+            <h1 class="title">
+                <a href="/" class="home_link">
+                    <span class="blind">Hello Korea !</span>
+                    <img src="{% static 'images/Hello-Korea.png' %}" class="home_img">
+                </a>
+            </h1>
+            <nav class="navbar">
+                <div class="toggle">
+                    <input type="checkbox" class="hamburger_btn">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <ul class="menu">
+						<li class="item" id="gyeongju">
+							<strong class="category"><a href="/GyeongJu">Gyeong Ju</a></strong>
+							<div class="column" id="gyeongju_column">
+								<a href="/GyeongJu/Accomodation" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="/GyeongJu/Food" class="link">{{hard_coded.Food_text}}</a>
+								<a href="/GyeongJu/Tradition" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="/GyeongJu/Souvenir" class="link">{{hard_coded.Souvenir_text}}</a>
+							</div>
+						</li>
+						<li class="item" id="suncheon">
+							<strong class="category"><a href="/SoonCheon">Sun Cheon</a></strong>
+							<div class="column" id="suncheon_column">
+								<a href="" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="" class="link">{{hard_coded.Food_text}}</a>
+								<a href="" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="" class="link">{{hard_coded.Souvenir_text}}</a>
+							</div>
+						</li>
+						<li class="item" id="jeonju">
+							<strong class="category"><a href="/JeonJu">Jeon Ju</a></strong>
+							<div class="column" id="jeonju_column">
+								<a href="" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="" class="link">{{hard_coded.Food_text}}</a>
+								<a href="" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="" class="link">{{hard_coded.Souvenir_text}}</a>
+							</div>
+						</li>
+                        <li class="item" id="language">
+                            <!-- <form action="" method="post" id="select_language"> -->
+                                {% csrf_token %}
+                                <label for="lang" class="blind">언어 선택</label>
+								<select onchange="if(this.value) location.href=(this.value);" class="select_lang">
+                                    <option>Select Language</option>
+									<option value="/set_language/?lang_c=ko">한국어</option>
+									<option value="/set_language/?lang_c=en">English</option>
+									<option value="/set_language/?lang_c=ja">日本語</option>
+									<option value="/set_language/?lang_c=zh-tw">繁體字</option>
+									<option value="/set_language/?lang_c=zh-cn">簡體字</option>
+									<option value="/set_language/?lang_c=de">Deutsch</option>
+									<option value="/set_language/?lang_c=ru">русский</option>
+								</select>
+                            <!-- </form> -->
+                        </li>
+                    </ul>
+                </div>
+            </nav>	
+        </div>
+    </header>
+    <nav>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <a href="http://127.0.0.1:8000/GyeongJu/Tradition"
+                style="display: inline-block; background-color: #DEEBDA; padding: 5px 10px; color:#000000; text-decoration: none; border: none; border-radius: 10px;">
+                # {{form_text.koreaTradition}}</a>
+            </div>
+            <div class="col-auto">
+                <a href="http://127.0.0.1:8000/GyeongJu/Tradition/clothes"
+                style="display: inline-block; background-color: #DEEBDA; padding: 5px 10px; color:#000000; text-decoration: none; border: none; border-radius: 10px;">
+                # {{form_text.clothTradition}}</a>
+            </div>
+            <div class="col-auto">
+                <a href="http://127.0.0.1:8000/GyeongJu/Tradition/accomodation"
+                style="display: inline-block; background-color: #DEEBDA; padding: 5px 10px; color:#000000; text-decoration: none; border: none; border-radius: 10px;">
+                # {{form_text.lodgeTradition}}</a>
+            </div>
+        </div>
+    </nav>
+    
+    {% if data %}
+    <div class="experience">
+        <h2>{{ type }}</h2>
+            <div class="row">
+            {% for item in data %}
+            <div class= "col-md-4">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    {% if item.info != '' %}
+                    <p class="card-text">{{ item.info }}</p>
+                    {% endif %}
+                    {% if item.call != '' %}
+                    <p class="card-text">{{form_text.tel_num}} : {{ item.call }}</p>
+                    {% endif %}
+                    {% if item.address != '' %}
+                    <p class="card-text">{{form_text.address_text}} : {{ item.address }}</p>
+                    {% endif %}
+                    {% if item.homepage != '' %}
+                    <a href="{{ item.homepage }}" style="display: inline-block; background-color: #B9E3C6; padding: 5px 10px; color: #fff; text-decoration: none; border: none; border-radius: 10px;">
+                        {{form_text.homepage_text}}
+                    </a>
+                    
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    </div>
+    
+    <!-- footer -->
+    <footer class="footer">
+        <div class="footer_wrap">
+            <strong class="title">Hello Korea!</strong>
+            <dl class="developer_list">
+                <dt>개발자 : </dt>
+                <dd>유준상</dd>
+                <dd>주경연</dd>
+                <dd>문소정</dd>
+                <dd>안중현</dd>
+            </dl>
+        </div>
+    </footer>
+    <script>
+		var slideIndex = 0;
+		showSlides();
+
+		function showSlides() {
+			var i;
+			var slides = document.getElementsByClassName("fade");
+
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slideIndex++;
+			if (slideIndex > slides.length) {
+				slideIndex = 1
+			}
+			slides[slideIndex - 1].style.display = "block";
+		
+			setTimeout(showSlides, 5000); // 2초마다 이미지가 체인지됩니다
+		}
+	</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"> </script>
+</body>
+</html>

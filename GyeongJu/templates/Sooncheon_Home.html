@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Full Menu</title>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/GyeongJu_home.css' %}">
+</head>
+<body>
+	<header class="hk_header">
+		<div class="header_inner">
+			<h1 class="title">
+				<a href="/" class="home_link">
+					<span class="blind">Hello Korea !</span>
+					<img src="{% static 'images/Hello-Korea.png' %}" class="home_img">
+				</a>
+			</h1>
+			<nav class="navbar">
+				<div class="toggle">
+					<input type="checkbox" class="hamburger_btn">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<ul class="menu">
+						<li class="item" id="gyeongju">
+							<strong class="category"><a href="/GyeongJu">Gyeong Ju</a></strong>
+							<div class="column" id="gyeongju_column">
+								<a href="/GyeongJu/Accomodation" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="/GyeongJu/Food" class="link">{{hard_coded.Food_text}}</a>
+								<a href="/GyeongJu/Tradition" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="/GyeongJu/Souvenir" class="link">{{hard_coded.Souvenir_text}}</a>
+							</div>
+						</li>
+						<li class="item" id="suncheon">
+							<strong class="category"><a href="/SoonCheon">Sun Cheon</a></strong>
+							<div class="column" id="suncheon_column">
+								<a href="" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="" class="link">{{hard_coded.Food_text}}</a>
+								<a href="" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="" class="link">{{hard_coded.Souvenir_text}}</a>
+							</div>
+						</li>
+						<li class="item" id="jeonju">
+							<strong class="category"><a href="/JeonJu">Jeon Ju</a></strong>
+							<div class="column" id="jeonju_column">
+								<a href="" class="link">{{hard_coded.lodging_text}}</a>
+								<a href="" class="link">{{hard_coded.Food_text}}</a>
+								<a href="" class="link">{{hard_coded.Experience_text}}</a>
+								<a href="" class="link">{{hard_coded.Souvenir_text}}</a>
+							</div>
+						</li>
+						<li class="item" id="language">
+							<!-- <form action="" method="post" id="select_language"> -->
+								{% csrf_token %}
+								<label for="lang" class="blind">언어 선택</label>
+								<select onchange="if(this.value) location.href=(this.value);" class="select_lang">
+                                    <option>Select Language</option>
+									<option value="/set_language/?lang_c=ko">한국어</option>
+									<option value="/set_language/?lang_c=en">English</option>
+									<option value="/set_language/?lang_c=ja">日本語</option>
+									<option value="/set_language/?lang_c=zh-tw">繁體字</option>
+									<option value="/set_language/?lang_c=zh-cn">簡體字</option>
+									<option value="/set_language/?lang_c=de">Deutsch</option>
+									<option value="/set_language/?lang_c=ru">русский</option>
+								</select>
+							<!-- </form> -->
+						</li>
+					</ul>
+				</div>
+			</nav>	
+		</div>
+	</header>
+	<main class="main">
+		<div class="img_wrap">
+			{% load static %}
+			<ul class="img_list">
+				<li class="item fade">
+					<img src="{% static 'images/sooncheon.jpeg' %}" alt="순천1" class="image">
+				</li>
+				<li class="item fade">
+					<img src="{% static 'images/sooncheon2.jpeg' %}" alt="순천2" class="image">
+				</li>
+				<li class="item fade">
+					<img src="{% static 'images/sooncheon3.jpeg' %}" alt="순천3" class="image">
+				</li>
+			</ul>
+		</div>
+	</main>
+	<footer class="footer">
+		<div class="footer_wrap">
+			<strong class="title">Hello Korea!</strong>
+			<dl class="developer_list">
+				<dt>개발자 : </dt>
+				<dd>유준상</dd>
+				<dd>주경연</dd>
+				<dd>문소정</dd>
+				<dd>안중현</dd>
+			</dl>
+		</div>
+	</footer>
+	<script>
+		var slideIndex = 0;
+		showSlides();
+
+		function showSlides() {
+			var i;
+			var slides = document.getElementsByClassName("fade");
+
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slideIndex++;
+			if (slideIndex > slides.length) {
+				slideIndex = 1
+			}
+			slides[slideIndex - 1].style.display = "block";
+		
+			setTimeout(showSlides, 5000); // 2초마다 이미지가 체인지됩니다
+		}
+	</script>
+</body>
+</html>
